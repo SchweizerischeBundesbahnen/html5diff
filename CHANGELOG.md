@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.0](https://github.com/SchweizerischeBundesbahnen/html5diff/compare/v1.2.0...v1.3.0) (2024-03-15)
+
+
+### Features
+
+* Improve diffing related RTE links with custom form of representation ([#29](https://github.com/SchweizerischeBundesbahnen/html5diff/issues/29)) ([7cadc78](https://github.com/SchweizerischeBundesbahnen/html5diff/commit/7cadc7828e74008113a88742cf4780c9f77237d6))
+
 ## [1.2.0](https://github.com/SchweizerischeBundesbahnen/html5diff/compare/v1.1.0...v1.2.0) (2024-03-14)
 
 
