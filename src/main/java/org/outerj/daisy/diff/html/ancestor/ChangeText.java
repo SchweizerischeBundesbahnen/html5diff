@@ -104,8 +104,6 @@ public class ChangeText {
     }
 
     private String clean(String s) {
-        return s.replaceAll("\n", "").replaceAll("\r", "").replaceAll("<",
-                        "&lt;").replaceAll(">", "&gt;").replaceAll("'", "&#39;")
-                .replaceAll("\"", "&#34;");
+        return s.replaceAll("\\n|\\r", "");
     }
 }

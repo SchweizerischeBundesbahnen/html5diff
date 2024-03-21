@@ -139,7 +139,9 @@ public class FileBasedTest {
     }
 
     private String replaceSpacesBetweenHtmlTags(String html) {
-        return html.replaceAll("(?<=\\>)\\s+(?=\\<)", "");
+        return html
+                .replaceAll("(?<=\\>)\\s+(?=\\<)", "")
+                .replaceAll("(?<=\\>)\n", "");
     }
 
     /**
