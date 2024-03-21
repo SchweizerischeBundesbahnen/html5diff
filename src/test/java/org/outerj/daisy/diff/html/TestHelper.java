@@ -30,17 +30,17 @@ public class TestHelper {
 	public static final String NEW_NAME = "b.html";
 	public static final String ANCESTOR_NAME = "ancestor.html";
 	public static final String EXPECTED_NAME = "expected.html";
-	
+
 	public static final String ENCODING = "UTF-8";
-	
+
 	private File testDir;
 	private File resultsFile;
-	
+
 	public static boolean isTestDataDir(File aDir) {
 		File tempExpectedFile = new File(aDir, OLD_NAME);
 		return tempExpectedFile.exists();
 	}
-	
+
 	/**
 	 * Creates a new test helper. A file named "results.txt" is expected to
 	 * reside inside this directory.
@@ -52,33 +52,33 @@ public class TestHelper {
 		}
 		resultsFile = new File(testDir, EXPECTED_NAME);
 	}
-	
+
 	public File getOld() throws IOException {
 		File tempFile = new File(testDir, OLD_NAME);
 		verifyExists(tempFile);
 		return tempFile;
 	}
-	
+
 	public File getNew() throws IOException {
 		File tempFile = new File(testDir, NEW_NAME);
 		verifyExists(tempFile);
 		return tempFile;
 	}
-	
+
 	public File getAncestor() throws IOException {
 		File tempFile = new File(testDir, ANCESTOR_NAME);
 		verifyExists(tempFile);
 		return tempFile;
 	}
-	
+
 	public boolean hasAncestor() throws IOException {
 		try {
-			return getAncestor() != null; 
+			return getAncestor() != null;
 		} catch (IOException ex) {
 			return false;
 		}
 	}
-	
+
 	private void verifyExists(File aFile) throws IOException {
 		if (!aFile.exists()) {
 			throw new FileNotFoundException(aFile.getAbsolutePath() + " does not exist");
@@ -92,7 +92,7 @@ public class TestHelper {
 	public File getTestDir() {
 		return testDir;
 	}
-	
+
 	/**
 	 * Returns the contents of the "expected.html" file of the test directory,
 	 * minus the html header and footer
@@ -109,12 +109,12 @@ public class TestHelper {
      * See http://selite.github.io/DocumentationStandard#generating-raw-links
 	 */
     public String getHtmlHeader() {
-		return "<html><head><link rel=\"stylesheet\" type=\"text/css\" href=\"https://cdn.jsdelivr.net/gh/DaisyDiff/DaisyDiff@5f7a3960f531179f59b0abdf6947efb0b72eaaa6/css/diff.css\"></link></head>\n";
+		return "<html><head><link rel=\"stylesheet\" type=\"text/css\" href=\"https://cdn.jsdelivr.net/gh/DaisyDiff/DaisyDiff@5f7a3960f531179f59b0abdf6947efb0b72eaaa6/css/diff.css\"></link></head>";
 	}
     public String getHtmlFooter() {
-    	return "\n</html>";
+    	return "</html>";
     }
-	
+
 	/**
 	 * Reads the contents of the given file into a String. The file contents
 	 * is expected to be in UTF-8 encoding.
@@ -131,7 +131,7 @@ public class TestHelper {
 			while ((tempRead = tempReader.read(buf)) >= 0) {
 				tempResult.append(buf, 0, tempRead);
 			}
-			
+
 			return tempResult.toString();
 		} finally {
 			tempReader.close();

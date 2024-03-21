@@ -109,12 +109,14 @@ public class FileBasedTest{
 					tempHelper.readContents(tempHelper.getNew()));
 		}
 
-		tempResults = new StringBuilder(tempResults)
-			.insert(0, tempHelper.getHtmlHeader()).append(tempHelper.getHtmlFooter()).toString();
+        tempResults = new StringBuilder(tempResults)
+                .insert(0, tempHelper.getHtmlHeader()).append(tempHelper.getHtmlFooter())
+                .toString();
+		tempResults = replaceSpacesBetweenHtmlTags(tempResults);
 
 		String tempExpected = null;
 		try {
-			tempExpected = tempHelper.getExpectedResults();
+			tempExpected = replaceSpacesBetweenHtmlTags(tempHelper.getExpectedResults());
 		} catch (FileNotFoundException ex) {
 			writeResultsFile(aTestDir, tempResults);
 			if (CREATE_EXPECTED_RESULTS) {
@@ -133,6 +135,10 @@ public class FileBasedTest{
 			System.err.println(tempResults);
 			assertEquals("Content for test: " + testDirectory, tempExpected, tempResults);
 		}
+	}
+
+	private String replaceSpacesBetweenHtmlTags(String html) {
+		return html.replaceAll("(?<=\\>)\\s+(?=\\<)", "");
 	}
 
 	/**
@@ -196,7 +202,7 @@ public class FileBasedTest{
         );
 
         List<Object[]> tempResult = new ArrayList<Object[]>();
-        for (File tempTestDataDir : tempTestDataDirs){ 
+        for (File tempTestDataDir : tempTestDataDirs){
             // to match the full path, use tempTestDataDir.getCanonicalPath()
             tempResult.add( new Object[]{ tempTestDataDir} );
         }
