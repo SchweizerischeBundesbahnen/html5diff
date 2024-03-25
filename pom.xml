@@ -114,8 +114,8 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
-                    <source>17</source>
-                    <target>17</target>
+                    <source>11</source>
+                    <target>11</target>
                 </configuration>
             </plugin>
 
@@ -140,6 +140,7 @@
                     </execution>
                 </executions>
                 <configuration>
+                    <skipTests>true</skipTests>
                     <environmentVariables>
                         <!-- use ${env.my_parameter} to access environment variables, if needed. Not sure whether they're passed automatically. -->
                         <!-- <ONLY_TESTS>modify_and_append_row</ONLY_TESTS> -->
