@@ -27,7 +27,7 @@ public class ImageNode extends TextNode {
     private AttributesImpl attributes;
 
     public ImageNode(TagNode parent, Attributes attrs) {
-        super(parent, "<img>" + attrs.getValue("src").toLowerCase() + "</img>");
+        super(parent, "<img>" + (attrs.getValue("md5") != null ? attrs.getValue("md5").toLowerCase() : attrs.getValue("src").toLowerCase()) + "</img>");
         attributes = new AttributesImpl(attrs);
     }
 
