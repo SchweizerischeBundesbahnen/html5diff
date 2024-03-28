@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.0](https://github.com/SchweizerischeBundesbahnen/html5diff/compare/v1.3.0...v1.4.0) (2024-03-28)
+
+
+### Features
+
+* Changed image comparison logic. ([#35](https://github.com/SchweizerischeBundesbahnen/html5diff/issues/35)) ([31766a8](https://github.com/SchweizerischeBundesbahnen/html5diff/commit/31766a8b4729d62587ed9a30c304f242ad9442d6))
+
 ## [1.3.0](https://github.com/SchweizerischeBundesbahnen/html5diff/compare/v1.2.0...v1.3.0) (2024-03-15)
 
 
