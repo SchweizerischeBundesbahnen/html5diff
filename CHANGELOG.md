@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.1](https://github.com/SchweizerischeBundesbahnen/html5diff/compare/v1.4.0...v1.4.1) (2024-05-23)
+
+
+### Bug Fixes
+
+* Items with same IDs also supposed as paired ([#45](https://github.com/SchweizerischeBundesbahnen/html5diff/issues/45)) ([b9f4e2c](https://github.com/SchweizerischeBundesbahnen/html5diff/commit/b9f4e2c14892922bf9edb477155416cb76e4e9db))
+
 ## [1.4.0](https://github.com/SchweizerischeBundesbahnen/html5diff/compare/v1.3.0...v1.4.0) (2024-03-28)
 
 
