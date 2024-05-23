@@ -241,7 +241,8 @@ public abstract class Node {
     protected boolean pairedLinks(TagNode linkA, TagNode linkB) {
         String optionId = getOptionId(linkA.getAttributes());
         if (Objects.equals(optionId, getOptionId(linkB.getAttributes()))
-                && (Objects.equals(getItemId(linkA.getAttributes()), getPairedItemId(linkB.getAttributes()))
+                && (Objects.equals(getItemId(linkA.getAttributes()), getItemId(linkB.getAttributes())) // Items with same IDs also supposed as paired
+                        || Objects.equals(getItemId(linkA.getAttributes()), getPairedItemId(linkB.getAttributes()))
                         || Objects.equals(getItemId(linkB.getAttributes()), getPairedItemId(linkA.getAttributes())))) {
             if ("custom".equals(optionId)) {
                 Node childNodeA = linkA.getNbChildren() == 1 ? linkA.getChild(0) : null;
