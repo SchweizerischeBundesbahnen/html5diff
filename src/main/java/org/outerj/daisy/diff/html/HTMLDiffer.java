@@ -170,8 +170,8 @@ public class HTMLDiffer implements Differ {
 
             while (i + 1 < differences.length
                     && differences[i + 1].kind() == kind
-                    && score(leftLength, differences[i + 1].leftLength(),
-                    rightLength, differences[i + 1].rightLength()) > (differences[i + 1]
+                    && ((int) score(leftLength, differences[i + 1].leftLength(),
+                    rightLength, differences[i + 1].rightLength())) > (differences[i + 1]
                     .leftStart() - leftEnd)) {
                 leftEnd = differences[i + 1].leftEnd();
                 rightEnd = differences[i + 1].rightEnd();
