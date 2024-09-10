@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.4.2](https://github.com/SchweizerischeBundesbahnen/html5diff/compare/v1.4.1...v1.4.2) (2024-09-10)
+
+
+### Bug Fixes
+
+* change deployment from repsy to s3 ([#58](https://github.com/SchweizerischeBundesbahnen/html5diff/issues/58)) ([ffc59bd](https://github.com/SchweizerischeBundesbahnen/html5diff/commit/ffc59bd66ca9f5c06c0c608735235931fa0575c2))
+* fixed code scanning alerts ([#49](https://github.com/SchweizerischeBundesbahnen/html5diff/issues/49)) ([b67357b](https://github.com/SchweizerischeBundesbahnen/html5diff/commit/b67357b812c25434e1aea4eadbb9ead054ddbd52))
+* nekohtml version update ([#61](https://github.com/SchweizerischeBundesbahnen/html5diff/issues/61)) ([a95f534](https://github.com/SchweizerischeBundesbahnen/html5diff/commit/a95f534b40c14b07f8a546caea6d497185581fd0))
+
 ## [1.4.1](https://github.com/SchweizerischeBundesbahnen/html5diff/compare/v1.4.0...v1.4.1) (2024-05-23)
 
 
