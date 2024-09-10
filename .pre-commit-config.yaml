@@ -2,7 +2,7 @@
 default_install_hook_types: [pre-commit, commit-msg]
 repos:
   - repo: https://github.com/lyz-code/yamlfix
-    rev: 1.16.0
+    rev: 1.17.0
     hooks:
       - id: yamlfix
   - repo: https://github.com/pre-commit/pre-commit-hooks
@@ -25,6 +25,6 @@ repos:
       - id: check-git-config-user-email
         args: [--templates, ^\S+\.\S+@sbb\.ch$]
   - repo: https://github.com/commitizen-tools/commitizen
-    rev: v3.28.0
+    rev: v3.29.0
     hooks:
       - id: commitizen
