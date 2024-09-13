@@ -6,12 +6,36 @@
     <artifactId>html5diff</artifactId>
     <version>1.4.3-SNAPSHOT</version>
 
+    <name>HTML5Diff</name>
+    <description>Visual comparison of HTML in Java. Fork of DaisyDiff/DaisyDiff</description>
+    <url>https://github.com/SchweizerischeBundesbahnen/html5diff</url>
+
     <licenses>
         <license>
             <name>Apache License Version 2.0, January 2004</name>
             <url>http://www.apache.org/licenses/</url>
         </license>
     </licenses>
+
+    <developers>
+        <developer>
+            <name>SBB Polarion Team</name>
+            <email>polarion-opensource@sbb.ch</email>
+            <organization>SBB AG</organization>
+            <organizationUrl>https://www.sbb.ch</organizationUrl>
+        </developer>
+    </developers>
+
+    <scm>
+        <connection>scm:git:git://github.com/SchweizerischeBundesbahnen/html5diff.git</connection>
+        <developerConnection>scm:git:ssh://github.com/SchweizerischeBundesbahnen/html5diff.git</developerConnection>
+        <url>https://github.com/SchweizerischeBundesbahnen/html5diff/tree/main</url>
+    </scm>
+
+    <issueManagement>
+        <system>GitHub</system>
+        <url>https://github.com/SchweizerischeBundesbahnen/html5diff/issues</url>
+    </issueManagement>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
