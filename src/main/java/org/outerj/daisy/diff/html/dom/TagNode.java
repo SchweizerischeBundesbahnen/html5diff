@@ -294,7 +294,7 @@ public class TagNode extends Node implements Iterable<Node> {
      * <p>It actually might have nothing to do with being really deleted, because
      * the element might be kept after its text content was deleted.<br>
      * Example:<br>
-     * table cells can be kept after its text content was deleted</br>
+     * table cells can be kept after its text content was deleted<br>
      * horizontal rule has never had text content, but can be deleted</p>
      */
     @Override

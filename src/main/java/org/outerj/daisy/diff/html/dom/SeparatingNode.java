@@ -8,7 +8,7 @@ package org.outerj.daisy.diff.html.dom;
  * Such nodes will be created between two text nodes, when they really
  * are separate, e.g. in two successive table cells.
  *
- * @author Carsten Pfeiffer <carsten.pfeiffer@gebit.de>
+ * @author Carsten Pfeiffer &lt;carsten.pfeiffer@gebit.de&gt;
  */
 public class SeparatingNode extends TextNode {
 

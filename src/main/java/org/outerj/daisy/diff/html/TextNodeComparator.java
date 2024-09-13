@@ -220,7 +220,7 @@ public class TextNodeComparator implements IRangeComparator, Iterable<TextNode> 
      * @param end
      * @param oldComp
      * @param before
-     * @param anOutputFormat specifies how this range shall be formatted in the output
+     * @param outputFormat specifies how this range shall be formatted in the output
      */
     public void markAsDeleted(int start, int end, TextNodeComparator oldComp,
                               int before, int after, ModificationType outputFormat) {
@@ -440,7 +440,7 @@ public class TextNodeComparator implements IRangeComparator, Iterable<TextNode> 
      * output document. The IDs must be successive along the different
      * comparators.
      *
-     * @param aDeletedID
+     * @param aChangedID
      */
     public void setStartChangedID(long aChangedID) {
         changedID = aChangedID;
@@ -451,7 +451,7 @@ public class TextNodeComparator implements IRangeComparator, Iterable<TextNode> 
      * output document. The IDs must be successive along the different
      * comparators.
      *
-     * @param aDeletedID
+     * @param aNewID
      */
     public void setStartNewID(long aNewID) {
         newID = aNewID;
