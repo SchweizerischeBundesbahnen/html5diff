@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.4](https://github.com/SchweizerischeBundesbahnen/html5diff/compare/v1.4.3...v1.4.4) (2024-09-13)
+
+
+### Bug Fixes
+
+* publish sources and javadocs ([#68](https://github.com/SchweizerischeBundesbahnen/html5diff/issues/68)) ([0377086](https://github.com/SchweizerischeBundesbahnen/html5diff/commit/0377086876db404b3fec2fbbe449d682f76b20af))
+
 ## [1.4.3](https://github.com/SchweizerischeBundesbahnen/html5diff/compare/v1.4.2...v1.4.3) (2024-09-13)
 
 
