@@ -148,7 +148,7 @@ public abstract class Node {
             result.setIndexInLastCommonParent(
                     myParents.get(i - 1).getIndexOf(this));
         } else if (myParents.size() > otherParents.size()) {
-            // All tags matched but there are tags left in this tree - 
+            // All tags matched but there are tags left in this tree -
             //other node is not so deeply nested
             result.setIndexInLastCommonParent(
                     myParents.get(i - 1).getIndexOf(myParents.get(i)));
