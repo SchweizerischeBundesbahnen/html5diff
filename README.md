@@ -37,7 +37,7 @@ public static void diffHTML(InputSource oldSource, InputSource newSource, Conten
 /**
  * Diffs two html files word for word as source, outputting the result to
  * the specified consumer.
- */            
+ */
 public static void diffTag(String oldText, String newText, ContentHandler consumer) throws Exception;
 
 }
