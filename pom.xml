@@ -44,6 +44,19 @@
         <maven-source-plugin.version>3.3.1</maven-source-plugin.version>
         <maven-gpg-plugin.version>3.2.7</maven-gpg-plugin.version>
 
+        <!-- Sonar and JaCoCo -->
+        <jacoco.version>0.8.12</jacoco.version>
+        <sonar.projectKey>SchweizerischeBundesbahnen_${project.artifactId}</sonar.projectKey>
+        <sonar.organization>schweizerischebundesbahnen</sonar.organization>
+        <sonar.projectName>${project.artifactId}</sonar.projectName>
+        <sonar.host.url>https://sonarcloud.io</sonar.host.url>
+        <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
+        <sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
+        <sonar.language>java</sonar.language>
+        <sonar.coverage.jacoco.xmlReportPaths>${project.basedir}/target/site/jacoco/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
+        <sonar.verbose>true</sonar.verbose>
+        <sonar.qualitygate.wait>true</sonar.qualitygate.wait>
+
         <nexus-staging-maven-plugin.version>1.7.0</nexus-staging-maven-plugin.version>
         <nexus-staging-maven-plugin.autoReleaseAfterClose>true</nexus-staging-maven-plugin.autoReleaseAfterClose>
     </properties>
@@ -258,5 +271,4 @@
             </plugin>
         </plugins>
     </build>
-
 </project>
