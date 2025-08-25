@@ -453,12 +453,11 @@ public class TagNode extends Node implements Iterable<Node> {
     }
 
     public static boolean isBlockLevel(Node node) {
-        try {
+        if (node instanceof TagNode) {
             TagNode tagnode = (TagNode) node;
             return isBlockLevel(tagnode.getQName());
-        } catch (ClassCastException e) {
-            return false;
         }
+        return false;
     }
 
     public boolean isBlockLevel() {
@@ -504,13 +503,12 @@ public class TagNode extends Node implements Iterable<Node> {
         int nbOriginalChildren = getNbChildren();
         for (int i = 0; i < nbOriginalChildren; i++) {
             Node child = getChild(i + shift);
-            try {
+            if (child instanceof TagNode) {
                 TagNode tagChild = (TagNode) child;
 
                 if (!tagChild.isPre()) {
                     tagChild.expandWhiteSpace();
                 }
-            } catch (ClassCastException e) {
             }
 
             if (!spaceAdded && child.isWhiteBefore()) {
