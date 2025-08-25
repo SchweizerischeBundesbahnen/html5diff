@@ -75,14 +75,9 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>org.nokogiri</groupId>
-                <artifactId>nekohtml</artifactId>
-                <version>1.9.22.noko2</version>
-            </dependency>
-            <dependency>
-                <groupId>xerces</groupId>
-                <artifactId>xercesImpl</artifactId>
-                <version>2.12.2</version>
+                <groupId>org.htmlunit</groupId>
+                <artifactId>neko-htmlunit</artifactId>
+                <version>4.15.0</version>
             </dependency>
             <dependency>
                 <groupId>junit</groupId>
@@ -94,12 +89,8 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.nokogiri</groupId>
-            <artifactId>nekohtml</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>xerces</groupId>
-            <artifactId>xercesImpl</artifactId>
+            <groupId>org.htmlunit</groupId>
+            <artifactId>neko-htmlunit</artifactId>
         </dependency>
 
         <!-- Test -->
@@ -262,7 +253,7 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <skipTests>true</skipTests>
+                    <skipTests>false</skipTests>
                     <environmentVariables>
                         <!-- use ${env.my_parameter} to access environment variables, if needed. Not sure whether they're passed automatically. -->
                         <!-- <ONLY_TESTS>modify_and_append_row</ONLY_TESTS> -->

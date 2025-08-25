@@ -1,0 +1,1 @@
+This test directory is intentionally ignored by FileBasedTest because of known parser/serialization differences around closing <br> handling.

@@ -17,7 +17,7 @@ package org.outerj.daisy.diff.helper;
 
 import java.io.IOException;
 
-import org.cyberneko.html.parsers.SAXParser;
+import org.htmlunit.cyberneko.parsers.SAXParser;
 import org.xml.sax.Attributes;
 import org.xml.sax.ContentHandler;
 import org.xml.sax.InputSource;
@@ -130,7 +130,7 @@ public class NekoHtmlParser {
                 newAtts.setURI(i, "");
                 newAtts.setQName(i, newAtts.getLocalName(i));
             }
-            consumer.startElement("", localName, localName, atts);
+            consumer.startElement("", localName, localName, newAtts);
         }
     }
 
