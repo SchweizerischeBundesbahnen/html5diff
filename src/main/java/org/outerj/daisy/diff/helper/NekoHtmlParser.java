@@ -130,7 +130,7 @@ public class NekoHtmlParser {
                 newAtts.setURI(i, "");
                 newAtts.setQName(i, newAtts.getLocalName(i));
             }
-            consumer.startElement("", localName, localName, atts);
+            consumer.startElement("", localName, localName, newAtts);
         }
     }
 
