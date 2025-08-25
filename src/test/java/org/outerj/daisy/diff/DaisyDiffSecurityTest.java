@@ -96,6 +96,7 @@ public class DaisyDiffSecurityTest {
             boolean actual = xr.getFeature(feature);
             assertEquals("Feature mismatch: " + feature, expected, actual);
         } catch (SAXNotRecognizedException | SAXNotSupportedException ignored) {
+            // the feature is not supported by the XMLReader -- it's OK
         }
     }
 

@@ -3,6 +3,7 @@ package org.outerj.daisy.diff;
 import org.junit.Test;
 import org.xml.sax.Attributes;
 import org.xml.sax.ContentHandler;
+import org.xml.sax.Locator;
 
 import java.io.BufferedReader;
 import java.io.StringReader;
@@ -19,24 +20,51 @@ public class DaisyDiffTagTest {
         int charactersEventCount = 0;
         int totalChars = 0;
 
-        @Override public void setDocumentLocator(org.xml.sax.Locator locator) {}
-        @Override public void startDocument() { startDocumentCount++; }
-        @Override public void endDocument() { endDocumentCount++; }
-        @Override public void startPrefixMapping(String prefix, String uri) {}
-        @Override public void endPrefixMapping(String prefix) {}
-        @Override public void startElement(String uri, String localName, String qName, Attributes atts) {
+        @Override
+        public void setDocumentLocator(Locator locator) {
+            // not required
+        }
+        @Override
+        public void startDocument() {
+            startDocumentCount++;
+        }
+        @Override
+        public void endDocument() {
+            endDocumentCount++;
+        }
+        @Override
+        public void startPrefixMapping(String prefix, String uri) {
+            // not required
+        }
+        @Override
+        public void endPrefixMapping(String prefix) {
+            // not required
+        }
+        @Override
+        public void startElement(String uri, String localName, String qName, Attributes atts) {
             startElementCount++;
         }
-        @Override public void endElement(String uri, String localName, String qName) {
+        @Override
+        public void endElement(String uri, String localName, String qName) {
             endElementCount++;
         }
-        @Override public void characters(char[] ch, int start, int length) {
+        @Override
+        public void characters(char[] ch, int start, int length) {
             charactersEventCount++;
             totalChars += length;
         }
-        @Override public void ignorableWhitespace(char[] ch, int start, int length) {}
-        @Override public void processingInstruction(String target, String data) {}
-        @Override public void skippedEntity(String name) {}
+        @Override
+        public void ignorableWhitespace(char[] ch, int start, int length) {
+            // not required
+        }
+        @Override
+        public void processingInstruction(String target, String data) {
+            // not required
+        }
+        @Override
+        public void skippedEntity(String name) {
+            // not required
+        }
     }
 
     @Test
