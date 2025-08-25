@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.5](https://github.com/SchweizerischeBundesbahnen/html5diff/compare/v1.4.4...v1.4.5) (2025-08-25)
+
+
+### Bug Fixes
+
+* sonarcloud code smells ([#88](https://github.com/SchweizerischeBundesbahnen/html5diff/issues/88)) ([5ebd56c](https://github.com/SchweizerischeBundesbahnen/html5diff/commit/5ebd56cfa31a47754202b97ae5642b1938c0cf69)), closes [#86](https://github.com/SchweizerischeBundesbahnen/html5diff/issues/86)
+
 ## [1.4.4](https://github.com/SchweizerischeBundesbahnen/html5diff/compare/v1.4.3...v1.4.4) (2024-09-13)
 
 

@@ -4,7 +4,7 @@
 
     <groupId>ch.sbb.html5diff</groupId>
     <artifactId>html5diff</artifactId>
-    <version>1.4.5-SNAPSHOT</version>
+    <version>1.4.5</version>
 
     <name>HTML5Diff</name>
     <description>Visual comparison of HTML in Java. Fork of DaisyDiff/DaisyDiff</description>
