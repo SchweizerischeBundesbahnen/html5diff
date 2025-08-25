@@ -208,6 +208,11 @@ public class FileBasedTest {
 
         List<Object[]> tempResult = new ArrayList<Object[]>();
         for (File tempTestDataDir : tempTestDataDirs) {
+            // Skip any test directory that contains a ".testignore" marker file
+            File ignoreMarker = new File(tempTestDataDir, ".testignore");
+            if (ignoreMarker.isFile()) {
+                continue;
+            }
             // to match the full path, use tempTestDataDir.getCanonicalPath()
             tempResult.add(new Object[]{tempTestDataDir});
         }
