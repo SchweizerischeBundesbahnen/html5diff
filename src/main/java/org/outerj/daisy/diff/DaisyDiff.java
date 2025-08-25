@@ -15,10 +15,6 @@
  */
 package org.outerj.daisy.diff;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.util.Locale;
-
 import org.outerj.daisy.diff.html.HTMLDiffer;
 import org.outerj.daisy.diff.html.HtmlSaxDiffOutput;
 import org.outerj.daisy.diff.html.TextNodeComparator;
@@ -26,11 +22,15 @@ import org.outerj.daisy.diff.html.dom.DomTreeBuilder;
 import org.outerj.daisy.diff.tag.TagComparator;
 import org.outerj.daisy.diff.tag.TagDiffer;
 import org.outerj.daisy.diff.tag.TagSaxDiffOutput;
-import org.xml.sax.ContentHandler;
-import org.xml.sax.InputSource;
-import org.xml.sax.SAXException;
-import org.xml.sax.XMLReader;
-import org.xml.sax.helpers.XMLReaderFactory;
+import org.xml.sax.*;
+
+import javax.xml.XMLConstants;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.parsers.SAXParser;
+import javax.xml.parsers.SAXParserFactory;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.util.Locale;
 
 public class DaisyDiff {
 
@@ -42,19 +42,16 @@ public class DaisyDiff {
             throws SAXException, IOException {
 
         DomTreeBuilder oldHandler = new DomTreeBuilder();
-        XMLReader xr1 = XMLReaderFactory.createXMLReader();
+        XMLReader xr1 = newXmlReader();
         xr1.setContentHandler(oldHandler);
         xr1.parse(oldSource);
-        TextNodeComparator leftComparator = new TextNodeComparator(oldHandler,
-                locale);
+        TextNodeComparator leftComparator = new TextNodeComparator(oldHandler, locale);
 
         DomTreeBuilder newHandler = new DomTreeBuilder();
-        XMLReader xr2 = XMLReaderFactory.createXMLReader();
+        XMLReader xr2 = newXmlReader();
         xr2.setContentHandler(newHandler);
         xr2.parse(newSource);
-
-        TextNodeComparator rightComparator = new TextNodeComparator(newHandler,
-                locale);
+        TextNodeComparator rightComparator = new TextNodeComparator(newHandler, locale);
 
         HtmlSaxDiffOutput output = new HtmlSaxDiffOutput(consumer, prefix);
         HTMLDiffer differ = new HTMLDiffer(output);
@@ -92,4 +89,32 @@ public class DaisyDiff {
         differ.diff(oldComp, newComp);
     }
 
+    private static XMLReader newXmlReader() throws SAXException {
+        try {
+            SAXParserFactory factory = SAXParserFactory.newDefaultInstance();
+            factory.setNamespaceAware(true);
+            factory.setValidating(false);
+            factory.setFeature(XMLConstants.FEATURE_SECURE_PROCESSING, true);
+
+            SAXParser saxParser = factory.newSAXParser();
+            XMLReader xmlReader = saxParser.getXMLReader();
+
+            setFeatureQuietly(xmlReader, "http://apache.org/xml/features/disallow-doctype-decl", true);
+            setFeatureQuietly(xmlReader, "http://xml.org/sax/features/external-general-entities", false);
+            setFeatureQuietly(xmlReader, "http://xml.org/sax/features/external-parameter-entities", false);
+            setFeatureQuietly(xmlReader, "http://apache.org/xml/features/nonvalidating/load-external-dtd", false);
+
+            return xmlReader;
+        } catch (ParserConfigurationException e) {
+            throw new SAXException("Failed to create secure XMLReader", e);
+        }
+    }
+
+    private static void setFeatureQuietly(XMLReader xr, String feature, boolean value) {
+        try {
+            xr.setFeature(feature, value);
+        } catch (SAXNotRecognizedException | SAXNotSupportedException ignored) {
+            // the feature is not supported by the XMLReader -- it's OK
+        }
+    }
 }
