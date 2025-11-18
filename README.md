@@ -44,7 +44,7 @@ import javax.xml.transform.stream.StreamResult;
 
 import org.outerj.daisy.diff.helper.NekoHtmlParser;
 import org.outerj.daisy.diff.html.HTMLDiffer;
-import org.outerj.daisy.diff.html.HtmlSaxDiffOutput
+import org.outerj.daisy.diff.html.HtmlSaxDiffOutput;
 import org.outerj.daisy.diff.html.TextNodeComparator;
 import org.outerj.daisy.diff.html.dom.DomTreeBuilder;
         
