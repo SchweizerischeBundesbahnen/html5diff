@@ -37,10 +37,16 @@ import java.io.StringWriter;
 
 import java.util.Locale;
 
+import javax.validation.constraints.NotNull;
+
 import javax.xml.transform.OutputKeys;
 import javax.xml.transform.sax.SAXTransformerFactory;
 import javax.xml.transform.sax.TransformerHandler;
 import javax.xml.transform.stream.StreamResult;
+
+import lombok.experimental.UtilityClass;
+
+import org.apache.commons.lang3.tuple.Pair;
 
 import org.outerj.daisy.diff.helper.NekoHtmlParser;
 import org.outerj.daisy.diff.html.HTMLDiffer;
