@@ -9,62 +9,111 @@
 [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=SchweizerischeBundesbahnen_html5diff&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=SchweizerischeBundesbahnen_html5diff)
 [![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=SchweizerischeBundesbahnen_html5diff&metric=vulnerabilities)](https://sonarcloud.io/summary/new_code?id=SchweizerischeBundesbahnen_html5diff)
 
-This is a maintenance project of DaisyDiff in Java. The initial commit is a checkout of version 1.2 of [old DaisyDiff project](https://code.google.com/archive/p/daisydiff).
+This is a fork of [DaisyDiff in Java project](https://github.com/DaisyDiff/DaisyDiff). The documentation of initial project can be found here: [daisydiff.github.io](https://daisydiff.github.io/).
 
-For more documentation see [daisydiff.github.io](https://daisydiff.github.io/).
+The aim of this project is not to provide a standalone tool of diffing HTMLs, which DaisyDiff provides among others, but to provide a library of diffing HTMLs for other Java applications.
 
-> WARNING
-The  maintenance of this repository by the [Nuxeo organization](https://github.com/nuxeo) is now strictly limited to critical security fixes.
-If you need some other kind of maintenance, please check the repository's [forks](https://github.com/DaisyDiff/DaisyDiff/network/members) or fork it yourself.
+# Installation
 
-# Standalone usage
-```
-java -jar daisydiff-1.2-NX4-SNAPSHOT-jar-with-dependencies.jar [oldHTML] [newHTML] [optional arguments]
-```
+## Adding as a Dependency
 
-Optional Arguments:
- * --file=[filename] - Write output to the specified file.
- * --type=[html/tag] - Use the html (default) diff algorithm or the tag diff.
- * --css=[cssfile1;cssfile2;cssfile3] - Add external CSS files.
- * --output=[html/xml] - Write html (default) or xml output.
- * --q  - Generate less console output.
+Artifacts of this project are uploaded to [Maven Central Repository](https://mvnrepository.com/artifact/ch.sbb.html5diff/html5diff), so to use it as a library in your project, add the following dependency to your `pom.xml`:
 
-Example:
-```
-java -jar daisydiff-1.2-NX4-SNAPSHOT-jar-with-dependencies.jar http://web.archive.org/web/20070107145418/http://news.bbc.co.uk/ http://web.archive.org/web/20070107182640/http://news.bbc.co.uk/ --css=http://web.archive.org/web/20070107145418/http://news.bbc.co.uk/nol/shared/css/news_r5.css
+```xml
+<dependency>
+    <groupId>ch.sbb.html5diff</groupId>
+    <artifactId>html5diff</artifactId>
+    <version>1.4.5</version>
+</dependency>
 ```
 
-Requirements: Java 1.5 or 6
+# Usage
 
-# Embedded usage
-```
-org.outerj.daisy.diff.DaisyDiff{
+## Usage as a library
 
-/**
- * Diffs two html files, outputting the result to the specified consumer.
- */
-public static void diffHTML(InputSource oldSource, InputSource newSource, ContentHandler consumer, String prefix, Locale locale) throws SAXException, IOException;
+```java
+import java.io.StringReader;
+import java.io.StringWriter;
 
-/**
- * Diffs two html files word for word as source, outputting the result to
- * the specified consumer.
- */
-public static void diffTag(String oldText, String newText, ContentHandler consumer) throws Exception;
+import java.util.Locale;
 
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.sax.SAXTransformerFactory;
+import javax.xml.transform.sax.TransformerHandler;
+import javax.xml.transform.stream.StreamResult;
+
+import org.outerj.daisy.diff.helper.NekoHtmlParser;
+import org.outerj.daisy.diff.html.HTMLDiffer;
+import org.outerj.daisy.diff.html.HtmlSaxDiffOutput
+import org.outerj.daisy.diff.html.TextNodeComparator;
+import org.outerj.daisy.diff.html.dom.DomTreeBuilder;
+        
+import org.xml.sax.InputSource;
+
+@UtilityClass
+public class DiffToolUtils {
+    public String computeDiff(@NotNull Pair<String, String> pairToDiff) {
+        try {
+            StringWriter finalResult = new StringWriter();
+            SAXTransformerFactory tf = (SAXTransformerFactory) TransformerFactory.newInstance();
+
+            TransformerHandler handler = tf.newTransformerHandler();
+            handler.getTransformer().setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "yes");
+            handler.getTransformer().setOutputProperty(OutputKeys.INDENT, "no");
+            handler.getTransformer().setOutputProperty(OutputKeys.METHOD, "html");
+            handler.getTransformer().setOutputProperty(OutputKeys.ENCODING, "UTF-8");
+            handler.setResult(new StreamResult(finalResult));
+
+            Locale locale = Locale.getDefault();
+
+            NekoHtmlParser parser = new NekoHtmlParser();
+
+            InputSource oldSource = new InputSource(new StringReader(pairToDiff.getLeft()));
+            InputSource newSource = new InputSource(new StringReader(pairToDiff.getRight()));
+
+            DomTreeBuilder oldHandler = new DomTreeBuilder();
+            parser.parse(oldSource, oldHandler);
+            TextNodeComparator leftComparator = new TextNodeComparator(oldHandler, locale);
+
+            DomTreeBuilder newHandler = new DomTreeBuilder();
+            parser.parse(newSource, newHandler);
+            TextNodeComparator rightComparator = new TextNodeComparator(newHandler, locale);
+
+            new HTMLDiffer(new HtmlSaxDiffOutput(handler, "diff")).diff(leftComparator, rightComparator);
+
+            return finalResult.toString();
+        } catch (Exception ex) {
+            return "Error occurred while getting HTML diff";
+        }
+    }
 }
 ```
 
-Requirements: Java 1.5 or 6
+## Usage in a CLI
 
-To run Daisy Diff embedded in your application, you don't need the entire Jar file. A much smaller Jar file without Xerces and NekoHtml will suffice.
+There is a side project [HTML5Diff CLI](https://gitlab.com/opendevise/oss/html5diff-cli/-/tree/main?ref_type=heads) which provides CLI 
+interface to functionality of this project. Please, read documentation of that project about how to use it. 
 
 
-# PHP
-The DaisyDiff algorithm has been integrated in MediaWiki. However, it had major errors and has been pulled out. More info at [www.mediawiki.org/wiki/Visual_Diff](http://www.mediawiki.org/wiki/Visual_Diff). See also [github.com/cdauth/htmldiff](https://github.com/cdauth/htmldiff).
+# Project Build
 
-# Acknowledgements
+This project is built using Maven. To compile the project, run the following command:
+```
+$ mvn compile
+```
 
- * Guy Van den Broeck <guy@guyvdb.eu>
- * Daniel Dickison
- * Antoine Taillefer
- * Thomas Roger
+To compile the project and run the tests, use:
+```
+$ mvn test
+```
+
+To compile the project, run the tests, and build the (thin) jar file, use:
+```
+$ mvn package
+```
+
+To compile the project, run the tests, build the (thin) jar file and install it to local Maven repository, use:
+```
+$ mvn install
+```
+
