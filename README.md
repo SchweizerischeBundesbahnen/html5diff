@@ -11,7 +11,7 @@
 
 This is a fork of [DaisyDiff in Java project](https://github.com/DaisyDiff/DaisyDiff). The documentation of initial project can be found here: [daisydiff.github.io](https://daisydiff.github.io/).
 
-The aim of this project is not to provide a standalone tool of diffing HTMLs, which DaisyDiff provides among others, but to provide a library of diffing HTMLs for other Java applications.
+The aim of this project is not to provide a standalone tool of diffing HTMLs, which DaisyDiff provides among others, but to provide a library of diffing HTMLs to other Java applications.
 
 # Installation
 
