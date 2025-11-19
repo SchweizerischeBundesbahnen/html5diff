@@ -97,7 +97,7 @@ public class DiffToolUtils {
 
 ## Usage in a CLI
 
-There is a side project [HTML5Diff CLI](https://gitlab.com/opendevise/oss/html5diff-cli/-/tree/main?ref_type=heads) which provides CLI 
+There is a side project [HTML5Diff CLI](https://gitlab.com/opendevise/oss/html5diff-cli) which provides CLI 
 interface to functionality of this project. Please, read documentation of that project about how to use it. 
 
 
