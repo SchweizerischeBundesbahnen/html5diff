@@ -69,12 +69,16 @@ public abstract class Node {
      * <code>List&lt;TagNode></code> if the parent is null.
      */
     public List<TagNode> getParentTree() {
+        if (cachedParentTree != null) {
+            return cachedParentTree;
+        }
         List<TagNode> ancestors = new ArrayList<TagNode>();
         for (TagNode ancestor = getParent(); ancestor != null; ancestor = ancestor.getParent()) {
             ancestors.add(ancestor);
         }
         Collections.reverse(ancestors);
-        return ancestors;
+        cachedParentTree = Collections.unmodifiableList(ancestors);
+        return cachedParentTree;
     }
 
     //change for correct insertion of the deleted nodes
@@ -171,6 +175,7 @@ public abstract class Node {
      */
     public void setParent(TagNode parent) {
         this.parent = parent;
+        this.cachedParentTree = null;
         if (parent != null)
             setRoot(parent.getRoot());
     }

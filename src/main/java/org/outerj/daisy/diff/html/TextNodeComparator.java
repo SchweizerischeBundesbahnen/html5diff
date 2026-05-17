@@ -273,7 +273,7 @@ public class TextNodeComparator implements IRangeComparator, Iterable<TextNode> 
         if (after < getRangeCount()) {
 
             LastCommonParentResult orderResult = getTextNode(before).getLastCommonParent(getTextNode(after));
-            List<TagNode> check = getTextNode(before).getParentTree();
+            List<TagNode> check = new ArrayList<>(getTextNode(before).getParentTree());
             Collections.reverse(check);
             for (TagNode curr : check) {
                 if (curr == orderResult.getLastCommonParent()) {
@@ -284,7 +284,7 @@ public class TextNodeComparator implements IRangeComparator, Iterable<TextNode> 
                 }
             }
             if (!useAfter) {
-                check = getTextNode(after).getParentTree();
+                check = new ArrayList<>(getTextNode(after).getParentTree());
                 Collections.reverse(check);
                 for (TagNode curr : check) {
                     if (curr == orderResult.getLastCommonParent()) {

@@ -15,12 +15,12 @@
  */
 package org.outerj.daisy.diff.html.dom;
 
-import java.util.*;
-
 import org.outerj.daisy.diff.html.ancestor.TextOnlyComparator;
 import org.outerj.daisy.diff.html.dom.helper.AttributesMap;
 import org.xml.sax.Attributes;
 import org.xml.sax.helpers.AttributesImpl;
+
+import java.util.*;
 
 /**
  * Node that can contain other nodes. Represents an HTML tag.
@@ -39,7 +39,8 @@ public class TagNode extends Node implements Iterable<Node> {
      * Attributes objects are unmodifiable and {@link #attributes} is final, so we can usefully cache the
      * equality of ours to others.
      */
-    private IdentityHashMap<Attributes, Boolean> attributesEqualityTests = new IdentityHashMap<Attributes, Boolean>();
+    private Map<Attributes, Boolean> attributesEqualityTests =
+            Collections.synchronizedMap(new IdentityHashMap<>());
 
     private AttributesMap cachedAttributesMap = null;
     private Integer cachedHashCode = null;
@@ -238,7 +239,8 @@ public class TagNode extends Node implements Iterable<Node> {
             TagNode otherNode = (TagNode) another;
             TagNode polarionRteLink = getEnclosingPolarionRteLink(this);
             TagNode anotherPolarionRteLink = getEnclosingPolarionRteLink(otherNode);
-            if (polarionRteLink != null && anotherPolarionRteLink != null && pairedLinks(polarionRteLink, anotherPolarionRteLink)) {
+            if (polarionRteLink != null && anotherPolarionRteLink != null && pairedLinks(polarionRteLink,
+                    anotherPolarionRteLink)) {
                 return true;
             } else if (this.getQName().equalsIgnoreCase(otherNode.getQName())) {
                 result = hasSameAttributes(otherNode.getAttributes());

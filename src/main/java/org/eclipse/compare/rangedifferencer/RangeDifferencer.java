@@ -12,8 +12,10 @@ package org.eclipse.compare.rangedifferencer;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 import org.eclipse.compare.internal.LCSSettings;
+import org.outerj.daisy.diff.DiffExecutor;
 
 /**
  * A <code>RangeDifferencer</code> finds the differences between two or three
@@ -103,13 +105,15 @@ public final class RangeDifferencer {
         try {
             if (ancestor == null)
                 return findDifferences(settings, left, right);
-            RangeDifference[] leftAncestorScript = null;
-            RangeDifference[] rightAncestorScript = findDifferences(
-                    settings, ancestor, right);
-            if (rightAncestorScript != null) {
-                leftAncestorScript = findDifferences(
-                        settings, ancestor, left);
-            }
+
+            CompletableFuture<RangeDifference[]> rightFuture =
+                CompletableFuture.supplyAsync(() -> findDifferences(settings, ancestor, right), DiffExecutor.getExecutor());
+            CompletableFuture<RangeDifference[]> leftFuture =
+                CompletableFuture.supplyAsync(() -> findDifferences(settings, ancestor, left), DiffExecutor.getExecutor());
+
+            RangeDifference[] rightAncestorScript = rightFuture.join();
+            RangeDifference[] leftAncestorScript  = leftFuture.join();
+
             if (rightAncestorScript == null || leftAncestorScript == null)
                 return null;
 
