@@ -41,6 +41,9 @@ public class TagNode extends Node implements Iterable<Node> {
      */
     private IdentityHashMap<Attributes, Boolean> attributesEqualityTests = new IdentityHashMap<Attributes, Boolean>();
 
+    private AttributesMap cachedAttributesMap = null;
+    private Integer cachedHashCode = null;
+
     public TagNode(TagNode parent, String qName, Attributes attributesarg) {
         super(parent);
         this.qName = qName;
@@ -215,7 +218,10 @@ public class TagNode extends Node implements Iterable<Node> {
     }
 
     private AttributesMap getAttributesMap() {
-        return new AttributesMap(getAttributes());
+        if (cachedAttributesMap == null) {
+            cachedAttributesMap = new AttributesMap(getAttributes());
+        }
+        return cachedAttributesMap;
     }
 
     /**
@@ -250,10 +256,14 @@ public class TagNode extends Node implements Iterable<Node> {
      */
     @Override
     public int hashCode() {
+        if (cachedHashCode != null) {
+            return cachedHashCode;
+        }
         final int simple = 29;
         int result = this.getQName().hashCode();
         AttributesMap attrs = getAttributesMap();
         result = result * simple + attrs.hashCode();
+        cachedHashCode = result;
         return result;
     }
 
@@ -265,13 +275,15 @@ public class TagNode extends Node implements Iterable<Node> {
      * opening HTML tag.
      */
     public String getOpeningTag() {
-        String s = "<" + getQName();
+        StringBuilder s = new StringBuilder();
+        s.append("<").append(getQName());
         Attributes localAttributes = getAttributes();
         for (int i = 0; i < localAttributes.getLength(); i++) {
-            s += " " + localAttributes.getQName(i) + "=\""
-                    + localAttributes.getValue(i) + "\"";
+            s.append(" ").append(localAttributes.getQName(i)).append("=\"")
+                    .append(localAttributes.getValue(i)).append("\"");
         }
-        return s += ">";
+        s.append(">");
+        return s.toString();
     }
 
     /**

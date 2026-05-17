@@ -32,6 +32,7 @@ public abstract class Node {
 
     protected TagNode parent;
     private TagNode root;
+    private List<TagNode> cachedParentTree = null; // add cache field
 
     /**
      * This constructor not only sets the parameter as the parent for the
@@ -263,10 +264,16 @@ public abstract class Node {
     }
 
     private String getInnerText(TagNode node) {
-        return StreamSupport.stream(node.spliterator(), false)
-                .filter(n -> n instanceof TextNode)
-                .map(n -> ((TextNode) n).getText())
-                .collect(Collectors.joining(" "));
+        StringBuilder sb = new StringBuilder();
+        for (Node n : node) {
+            if (n instanceof TextNode) {
+                if (sb.length() > 0) {
+                    sb.append(" ");
+                }
+                sb.append(((TextNode) n).getText());
+            }
+        }
+        return sb.toString();
     }
 
     protected String getItemId(Attributes attributes) {

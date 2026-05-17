@@ -157,6 +157,9 @@ public class AttributesMap extends HashMap<String, String> {
      * @param style2
      * @return
      */
+    private static final java.util.regex.Pattern NL_TAB_PATTERN = java.util.regex.Pattern.compile(NL_TAB_REGEXP);
+    private static final java.util.regex.Pattern SPACE_PATTERN = java.util.regex.Pattern.compile(SPACE + "++");
+
     public static boolean equivalentStyles(String style1, String style2) {
         if (style1 == null) {
             if (style2 == null) {
@@ -170,11 +173,11 @@ public class AttributesMap extends HashMap<String, String> {
         //no nulls at this point
         //get rid of the new line symbols and tabulation
         //substituting them with spaces to not "jam" separate tokens together
-        style1 = style1.replaceAll(NL_TAB_REGEXP, SPACE);
-        style2 = style2.replaceAll(NL_TAB_REGEXP, SPACE);
+        style1 = NL_TAB_PATTERN.matcher(style1).replaceAll(SPACE);
+        style2 = NL_TAB_PATTERN.matcher(style2).replaceAll(SPACE);
         //get rid of consecutive spaces
-        style1 = style1.replaceAll(SPACE + "++", SPACE);
-        style2 = style2.replaceAll(SPACE + "++", SPACE);
+        style1 = SPACE_PATTERN.matcher(style1).replaceAll(SPACE);
+        style2 = SPACE_PATTERN.matcher(style2).replaceAll(SPACE);
         //get rid of leading/trailing spaces
         style1 = style1.trim();
         style2 = style2.trim();
@@ -247,8 +250,8 @@ public class AttributesMap extends HashMap<String, String> {
         }
         //no nulls at this point
         //get rid of new line and tabulation symbols
-        classSet1 = classSet1.replaceAll(NL_TAB_REGEXP, SPACE);
-        classSet2 = classSet2.replaceAll(NL_TAB_REGEXP, SPACE);
+        classSet1 = NL_TAB_PATTERN.matcher(classSet1).replaceAll(SPACE);
+        classSet2 = NL_TAB_PATTERN.matcher(classSet2).replaceAll(SPACE);
         //trim leading/trailing spaces
         classSet1 = classSet1.trim();
         classSet2 = classSet2.trim();
@@ -293,9 +296,9 @@ public class AttributesMap extends HashMap<String, String> {
         //no nulls at this point
         //get rid of the new line symbols and tabulation
         //substituting them with spaces to not "jam" separate tokens together
-        styleVal = styleVal.replaceAll(NL_TAB_REGEXP, SPACE);
+        styleVal = NL_TAB_PATTERN.matcher(styleVal).replaceAll(SPACE);
         //get rid of consecutive spaces
-        styleVal = styleVal.replaceAll(SPACE + "++", SPACE);
+        styleVal = SPACE_PATTERN.matcher(styleVal).replaceAll(SPACE);
         //get rid of leading/trailing spaces
         styleVal = styleVal.trim();
         //check if they there's anything left
@@ -348,7 +351,7 @@ public class AttributesMap extends HashMap<String, String> {
         }
         //no nulls at this point
         //get rid of new line and tabulation symbols
-        classVal = classVal.replaceAll(NL_TAB_REGEXP, SPACE);
+        classVal = NL_TAB_PATTERN.matcher(classVal).replaceAll(SPACE);
         //trim leading/trailing spaces
         classVal = classVal.trim();
         //multiple class names in the class attributes
