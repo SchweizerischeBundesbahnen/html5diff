@@ -1,37 +1,16 @@
 ---
 name: ActionLint
 on:
-  # Run on push to main/master branch
   push:
     branches: [main]
-  # Run on all pull requests
   pull_request:
     branches: ['**']
-  # Allow manual triggering
   workflow_dispatch:
-permissions:
-  contents: read
+permissions: {}
 jobs:
   actionlint:
-    name: Check GitHub Actions Workflows
-    runs-on: ubuntu-latest
+    uses: SchweizerischeBundesbahnen/github-workflows-polarion/.github/workflows/reusable-actionlint.yml@main
     permissions:
       checks: write
       contents: read
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7
-        with:
-          fetch-depth: 1
-          persist-credentials: false
-      - name: Run actionlint
-        uses: reviewdog/action-actionlint@d63ba7532e0942965320cd8d73cbae4c7b3c5283  # v1.73.1
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          # Report all findings as annotations directly on GitHub
-          reporter: github-check
-          # Error on warnings as well as errors
-          fail_level: error
-          # Comment on the pull request
-          level: error
-          filter_mode: nofilter
+      pull-requests: read

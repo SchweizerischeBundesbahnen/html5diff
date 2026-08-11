@@ -205,14 +205,9 @@ public class AttributesMap extends HashMap<String, String> {
         Arrays.sort(styleRules2);
         //remove the spaces between property name,
         //the colon and the value
-        final String COLON_W_SPACES =
-                SPACE + "*+:" + SPACE + "*+";
-        final String COLON = ":";
         for (int i = 0; i < styleRules1.length; i++) {
-            styleRules1[i] =
-                    styleRules1[i].replaceFirst(COLON_W_SPACES, COLON);
-            styleRules2[i] =
-                    styleRules2[i].replaceFirst(COLON_W_SPACES, COLON);
+            styleRules1[i] = collapseSpacesAroundColon(styleRules1[i]);
+            styleRules2[i] = collapseSpacesAroundColon(styleRules2[i]);
             if (!styleRules1[i].equals(styleRules2[i])) {
                 return false;
             }
@@ -317,17 +312,41 @@ public class AttributesMap extends HashMap<String, String> {
         Arrays.sort(styleRules);
         //remove the spaces between property name,
         //the colon and the value
-        final String COLON_W_SPACES =
-                SPACE + "*+:" + SPACE + "*+";
-        final String COLON = ":";
         StringBuffer result = new StringBuffer();
         for (int i = 0; i < styleRules.length; i++) {
-            result.append(styleRules[i].replaceFirst(COLON_W_SPACES, COLON))
+            result.append(collapseSpacesAroundColon(styleRules[i]))
                     .append("; ");
         }
         //take away last trailing "; "
         result.setLength(result.length() - 2);
         return result.toString();
+    }
+
+    /**
+     * Removes the spaces around the first colon of a CSS rule. This used to be
+     * a <code>replaceFirst(" *+: *+", ":")</code> call, but that regular
+     * expression is retried at every position of the rule, which costs
+     * quadratic time on long runs of spaces. A plain scan does the same in
+     * linear time.
+     *
+     * @param styleRule - a single CSS property : value pair
+     * @return the rule without spaces around its first colon
+     */
+    private static String collapseSpacesAroundColon(String styleRule) {
+        final char COLON = ':';
+        int colon = styleRule.indexOf(COLON);
+        if (colon < 0) {
+            return styleRule; //no property : value pair, nothing to collapse
+        }
+        int start = colon;
+        while (start > 0 && styleRule.charAt(start - 1) == ' ') {
+            start--;
+        }
+        int end = colon + 1;
+        while (end < styleRule.length() && styleRule.charAt(end) == ' ') {
+            end++;
+        }
+        return styleRule.substring(0, start) + COLON + styleRule.substring(end);
     }
 
     /**

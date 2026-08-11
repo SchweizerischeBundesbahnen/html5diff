@@ -10,6 +10,8 @@
  *******************************************************************************/
 package org.eclipse.compare.rangedifferencer;
 
+import java.util.Objects;
+
 /**
  * Description of a change between two or three ranges of comparable entities.
  * <p>
@@ -248,6 +250,12 @@ public class RangeDifference {
                     && lAncestorLength == other.lAncestorLength;
         }
         return super.equals(obj);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(fKind, fLeftStart, fLeftLength, fRightStart,
+                fRightLength, lAncestorStart, lAncestorLength);
     }
 
     @Override

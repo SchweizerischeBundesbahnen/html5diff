@@ -4,17 +4,13 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
+permissions: {}
 jobs:
   release-please:
-    runs-on: ubuntu-latest
+    uses: SchweizerischeBundesbahnen/github-workflows-polarion/.github/workflows/reusable-release-please.yml@main
     permissions:
       contents: write
       pull-requests: write
-      issues: write
-    steps:
-      - name: 🚀 release-please
-        id: release
-        uses: googleapis/release-please-action@45996ed1f6d02564a971a2fa1b5860e934307cf7  # v5
-        with:
-          release-type: maven
-          target-branch: main
+    with:
+      release-type: maven
+      target-branch: ${{ github.ref_name }}

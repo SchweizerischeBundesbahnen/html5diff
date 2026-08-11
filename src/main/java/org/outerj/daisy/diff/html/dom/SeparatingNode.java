@@ -30,4 +30,12 @@ public class SeparatingNode extends TextNode {
         }
     }
 
+    @Override
+    public int hashCode() {
+        // Two separating nodes are equal only when they are the same object, or when
+        // they sit in paired Polarion RTE links. The latter cannot be derived from a
+        // single node, so a constant is the only value consistent with equals().
+        return 0;
+    }
+
 }
