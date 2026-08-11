@@ -76,7 +76,7 @@ public class TextOnlyComparator implements IRangeComparator {
         LCSSettings settings = new LCSSettings();
         settings.setUseGreedyMethod(true);
         settings.setPowLimit(1.5);
-        settings.setTooLong(150 * 150);
+        settings.setTooLong(150.0 * 150);
 
         RangeDifference[] differences = RangeDifferencer.findDifferences(
                 settings, other, this);
