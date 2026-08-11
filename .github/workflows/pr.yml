@@ -3,23 +3,9 @@ name: PR checks
 on:
   pull_request:
     types: [opened, edited, synchronize, reopened, unlocked]
-permissions:
-  contents: read
+permissions: {}
 jobs:
   check-conventional-commit:
-    name: Check commit messages
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7
-        with:
-          fetch-depth: 0
-          persist-credentials: false
-      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97  # v7.0.0
-        with:
-          python-version: 3.x
-      - run: pip install commitizen
-      - name: Check commit messages
-        env:
-          BASE_SHA: ${{ github.event.pull_request.base.sha }}
-          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
-        run: cz check --rev-range "$BASE_SHA..$HEAD_SHA"
+    uses: SchweizerischeBundesbahnen/github-workflows-polarion/.github/workflows/reusable-pr.yml@main
+    permissions:
+      contents: read
