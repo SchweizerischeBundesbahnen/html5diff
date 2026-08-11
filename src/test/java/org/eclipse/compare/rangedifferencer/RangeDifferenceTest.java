@@ -4,7 +4,6 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertTrue;
 
 /**
  * Tests that {@link RangeDifference#hashCode()} follows its {@link RangeDifference#equals(Object)}.
@@ -15,7 +14,7 @@ public class RangeDifferenceTest {
     public void testEqualDifferencesShareHashCode() {
         RangeDifference one = new RangeDifference(RangeDifference.CHANGE, 1, 2, 3, 4, 5, 6);
         RangeDifference other = new RangeDifference(RangeDifference.CHANGE, 1, 2, 3, 4, 5, 6);
-        assertTrue(one.equals(other));
+        assertEquals(one, other);
         assertEquals(one.hashCode(), other.hashCode());
     }
 

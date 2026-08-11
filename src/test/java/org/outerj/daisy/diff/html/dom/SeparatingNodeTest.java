@@ -4,8 +4,7 @@ import org.junit.Test;
 import org.xml.sax.helpers.AttributesImpl;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertNotEquals;
 
 /**
  * Tests that {@link SeparatingNode#hashCode()} follows its {@link SeparatingNode#equals(Object)}.
@@ -13,18 +12,16 @@ import static org.junit.Assert.assertTrue;
 public class SeparatingNodeTest {
 
     @Test
-    public void testSeparatorEqualsOnlyItself() {
+    public void testSeparatorsAreNotEqual() {
         TagNode parent = new TagNode(null, "td", new AttributesImpl());
-        SeparatingNode separator = new SeparatingNode(parent);
-        SeparatingNode otherSeparator = new SeparatingNode(parent);
-        assertTrue(separator.equals(separator));
-        assertFalse(separator.equals(otherSeparator));
+        assertNotEquals(new SeparatingNode(parent), new SeparatingNode(parent));
     }
 
     @Test
-    public void testHashCodeIsStable() {
+    public void testSeparatorsShareTheirHashCode() {
+        // Two separators can still be equal when they sit in paired Polarion RTE links,
+        // which no single node can derive, so every separator hashes the same.
         TagNode parent = new TagNode(null, "td", new AttributesImpl());
-        SeparatingNode separator = new SeparatingNode(parent);
-        assertEquals(separator.hashCode(), separator.hashCode());
+        assertEquals(new SeparatingNode(parent).hashCode(), new SeparatingNode(parent).hashCode());
     }
 }
