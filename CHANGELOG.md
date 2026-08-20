@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.4.6](https://github.com/SchweizerischeBundesbahnen/html5diff/compare/v1.4.5...v1.4.6) (2026-08-20)
+
+
+### Bug Fixes
+
+* **deps:** update dependency org.htmlunit:neko-htmlunit to v4.16.0 ([47be02f](https://github.com/SchweizerischeBundesbahnen/html5diff/commit/47be02f6a8476408cd4adf5a879fa9ffb4aff162))
+* **deps:** update dependency org.htmlunit:neko-htmlunit to v4.17.0 ([ae55770](https://github.com/SchweizerischeBundesbahnen/html5diff/commit/ae557702c92765b0db70f71cce095855ae3d91f0))
+* **deps:** update dependency org.htmlunit:neko-htmlunit to v4.18.0 ([f2d1e87](https://github.com/SchweizerischeBundesbahnen/html5diff/commit/f2d1e874c3f2547f202aa7ce1c93526f625a4442))
+* **deps:** update dependency org.htmlunit:neko-htmlunit to v4.20.1 ([#93](https://github.com/SchweizerischeBundesbahnen/html5diff/issues/93)) ([7a8d0d9](https://github.com/SchweizerischeBundesbahnen/html5diff/commit/7a8d0d924b8a962d50bb955a1477c20a623d381d))
+* **deps:** update dependency org.htmlunit:neko-htmlunit to v4.21.0 ([f6b917d](https://github.com/SchweizerischeBundesbahnen/html5diff/commit/f6b917d8a0c34acbe30bc732b5cb91a5c05ab7d3))
+* **deps:** update dependency org.htmlunit:neko-htmlunit to v5 ([#96](https://github.com/SchweizerischeBundesbahnen/html5diff/issues/96)) ([cbff60f](https://github.com/SchweizerischeBundesbahnen/html5diff/commit/cbff60fde7d254d293fd944543bb10c09334d852))
+* sonar security reliability ([#102](https://github.com/SchweizerischeBundesbahnen/html5diff/issues/102)) ([7dff7fc](https://github.com/SchweizerischeBundesbahnen/html5diff/commit/7dff7fcce6ae1118fdcb48439999059822fc6b19))
+
 ## [1.4.5](https://github.com/SchweizerischeBundesbahnen/html5diff/compare/v1.4.4...v1.4.5) (2025-08-25)
 
 
